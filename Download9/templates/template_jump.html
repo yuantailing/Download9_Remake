@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Download9</title>
+<link href="/static/css/template_dialog.css" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/template_jump.js"></script>
+<body>
+<div class = "container">
+	<div id = "Dark"></div>
+	<div id = "Dialog">
+		<div id = "Dialog_Content">
+			<span id = "Dialog_close">&times;</span>
+			<p id = "nexturl" style = "display: none">{{ nexturl }}</p>
+			<h1>{{ title }}</h1>
+			<hr />
+			{% for x in context %}
+				<p>{{ x }}</p>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+</body>
+</html>

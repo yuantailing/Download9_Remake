@@ -1,0 +1,68 @@
+
+#Dialog {
+	display: none;
+	position: fixed;
+	z-index: 3;
+	left: 50%;
+	margin-left: -20%;
+	width: 40%;
+	height: auto;
+	background: #FFFFFF;
+}
+
+#Dark {
+	display: none;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	background: rgb(0, 0, 0, 0.3);
+}
+
+#Dialog_Content h1 {
+	z-index: inherit;
+	color: #000000;
+	margin-bottom: 10px;
+	font-size: 25px;
+}
+
+.container {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+
+
+#Dialog_Content {
+	padding: 0px;
+	margin: 20px;
+}
+
+#Dialog_Content p {
+	margin: 10px 20px;
+}
+
+#Dialog_close {
+	position: absolute;
+	top: 5px;
+	left: 100%;
+	margin-left: -45px;
+	font-size: 40px;
+	font-stretch: 100%;
+	color: #959595;
+	cursor: pointer;
+}
+
+#Dialog_close:hover {
+	color: #434343;
+}
+
+#Dialog_Content hr {
+	margin: 0px;
+}

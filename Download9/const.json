@@ -1,0 +1,11 @@
+{
+  "HINT" : {
+    "TITLE" : {
+      "WRONG" : "错误"
+    },
+    "CONTEXT" : {
+      "NOTEXIST": "您所访问的页面不存在",
+      "JUMPTOINDEX": "即将跳转至主页"
+    }
+  }
+}

@@ -3,45 +3,11 @@
 <head>
 <meta charset="utf-8">
 <title>Download9</title>
-<link href="css/template_task.css" rel="stylesheet" type="text/css">
+<link href="/static/css/template_task.css" rel="stylesheet" type="text/css">
 </head>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-	$("#task_tick_a").click(function(){
-		if ($("#task_tick_a").is(":checked")) {
-			$("input[type='checkbox']").each(function(){
-				this.checked = true;
-			});
-		}
-		else {
-			$("input[type='checkbox']").each(function(){
-				this.checked = false;
-			});
-		}
-	});
-	$("input").click(function(){
-		$allchecked = true;
-		$("input[type='checkbox']").each(function(){
-			if ($(this).attr("id") != "task_tick_a") {
-				if (!($(this).is(":checked"))) {
-					$allchecked = false;
-				}
-			}
-		});
-		if ($allchecked) {
-			$("#task_tick_a").each(function(){
-				this.checked = true;
-			});
-		}
-		else {
-			$("#task_tick_a").each(function(){
-				this.checked = false;
-			});
-		}
-	});
-});
-</script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/template_profile.js"></script>
+<script type="text/javascript" src="/static/js/template_task.js"></script>
 <body>
 <div class = "container">
 	<div class = "header">
@@ -52,7 +18,8 @@ $(document).ready(function(){
 			<ul class = "ul_right">
 				<li>任务数量：0/10</li>
 				<li>已用空间：0/20480MB</li>
-				<li class = "info_user"><img src = "images/profile.png"></li>
+				<li>欢迎：admin</li>
+				<li id = "info_user" class = "info_user"><img src = "images/profile.png"></li>
 			</ul>
 		</nav>
 	</div>
