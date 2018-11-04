@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Download9登入</title>
+<link href="/static/css/template_login.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class = "container">
+	<section class = "content">
+		<h1 class = "title">欢迎使用Download9</h1>
+		<form method = "POST" action = "/check_login/">
+            {% csrf_token %}
+			<table>
+				<tr>
+					<td><p>用户名：</p></td>
+					<td><input type = "text" id = "username"></td>
+				</tr>
+				<tr>
+					<td><p>密码：</p></td>
+					<td><input type = "text" id = "password"></td>
+				</tr>
+			</table>
+			<section class = "button">
+				<button type = "submit" class = "button_submit">登陆</button>
+				<a href = "/account9_login"><button class = "button_login" type = "button">使用Account9登陆</button></a>
+			</section>
+		</form>
+	</section>
+</div>
+</body>
+</html>

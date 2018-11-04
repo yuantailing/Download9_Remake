@@ -1,0 +1,294 @@
+.container {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+.header {
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	background-color: #52BAD5;
+}
+
+body {
+	margin: 0px;
+}
+
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.title {
+	font-size: 25px;
+}
+
+p {
+	margin: 0px;		
+}
+
+.header nav {
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+
+li {
+	list-style: none;
+}
+
+.header nav ul {
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.dashboard {
+	position: fixed;
+	width: 170px;
+	height: 100%;
+	background-color: #505050;
+}
+
+.title_work {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 20px;
+	margin: 0px;
+	font-size: 18px;
+}
+
+.title_work:hover {
+	color: #52BAD5;
+	background-color: #303030;
+}
+
+.dashboard nav ul li {
+	margin-top: 10px;
+}
+
+.sub_menu {
+	display: none;
+	background-color: #303030;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	height: 100%;
+}
+
+.sub_option {
+	padding-left: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	color: #BBBBBB;
+}
+
+.dashboard_all {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 20px;
+}
+
+.sub_option:hover {
+	color: #52BAD5;
+}
+
+.sub_option_onpage {
+	font-weight: bold;
+	padding-left: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	color: #FFFFFF;
+}
+
+.title_work_onpage {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 20px;
+	margin: 0px;
+	font-size: 18px;
+	color: #FFFFFF;
+	background-color: #52BAD5;
+}
+
+.sub_menu_onpage {
+	background-color: #303030;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	height: 100%;
+}
+
+.content {
+	padding-left: 170px;
+	height: 100%;
+	width: auto;
+	background-color: #EBEBEB;
+}
+
+.title_content {
+	margin: 0px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	font-size: 30px;
+}
+
+.ul_left {
+	float: left;
+}
+
+.ul_right {
+	float: right;
+}
+
+.header nav ul li {
+	height: 50px;
+	line-height: 50px;
+	display: inline-block;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #FFFFFF;
+}
+
+.header img {
+	padding-top: 10px;
+	width: 30px;
+	height: 30px;
+}
+
+.ul_left li {
+	padding-left: 20px;
+}
+
+.ul_right li {
+	padding-right: 10px;
+}
+
+.task_line_0 {
+	background-color: #FFFFFF;
+}
+
+.task_line_1 {
+	background-color: #EBEBEB;
+}
+
+.task_state {
+	width: 85px;
+}
+
+.task_filename {
+	display: block;
+}
+
+.task_size {
+	width: 5%;
+}
+
+.task_velocity {
+	width: 10%;
+}
+
+.task_timeremain {
+	width: 10%;
+}
+
+.task_process {
+	width: 5%;
+}
+
+.task_id {
+	width: 35px;
+}
+
+.task_date {
+	width: 10%;
+}
+
+.content input {
+	height: 16px;
+	width: 16px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.task {
+	width: 95%;
+	margin-left: 30px;
+	border-spacing: 0px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DDDDDD;
+}
+
+.task tr {
+	height: 30px;
+	line-height: 30px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 30px;
+	margin-right: 30px;
+	padding: 0px;
+	width: auto;
+}
+
+.task tr td {
+	white-space: nowrap;
+}
+
+.task_tick {
+	width: 35px;
+	text-align: center;
+	line-height: 100%;
+	padding: 0px;
+}
+
+#operation_delete {
+	width: 50px;
+}
+
+.operation {
+	float: left;
+}
+
+.operation input {
+	background-color: #EBEBEB;
+	border-spacing: 0px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	border-color: #AAAAAA;
+	height: 26px;
+	line-height: 26px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.operation input:hover {
+	border-color: #888888;
+	background-color: #F0F0F0;
+	cursor: pointer;
+}
+
+#operation_download {
+	width: 80px;
+}
+
+.table_top {
+	height: 35px;
+	margin-left: 30px;
+	width: 95%;
+	vertical-align: top;
+}
+
+.number_all {
+	float: right;
+}

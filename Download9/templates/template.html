@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Download9</title>
+<link href="css/template.css" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$hovered = false;
+	$("#info_user,#info").hover(function(){
+		$hovered ^= true;
+		if ($hovered) {
+			$("#info_user").attr("class", "info_user_hover");
+			$("#info").attr("class", "info_hover");
+		}
+		else {
+			$("#info_user").attr("class", "info_user");
+			$("#info").attr("class", "info");
+		}
+	});
+});
+</script>
+<body>
+<div class = "container">
+	<div class = "header">
+		<nav>
+			<ul class = "ul_left">
+				<li class = "title"><a href = "">Download9</a></li>
+			</ul>
+			<ul class = "ul_right">
+				<li>任务数量：0/10</li>
+				<li>已用空间：0/20480MB</li>
+				<li>欢迎：admin</li>
+				<li id = "info_user" class = "info_user"><img src = "images/profile.png"></li>
+			</ul>
+		</nav>
+	</div>
+	<div id = "info" class = "info">
+		<div class = "logout">
+			<a href = ""><p>退出登录</p></a>
+		</div>
+	</div>
+	<div class = "dashboard">
+		<nav>
+			<ul class = "dashboard_all">
+				<a href = ""><li class = "title_work_onpage">任务</li></a>
+				<ul class = "sub_menu_onpage">
+					<a href = ""><li class = "sub_option_onpage">全部任务</li></a>
+					<a href = ""><li class = "sub_option">正在下载</li></a>
+					<a href = ""><li class = "sub_option">已完成任务</li></a>
+				</ul>
+				<a href = ""><li class = "title_work">新建任务</li></a>
+				<ul class = "sub_menu">
+					<a href = ""><li class = "sub_option">新建链接任务</li></a>
+					<a href = ""><li class = "sub_option">新建BT任务</li></a>
+				</ul>
+			</ul>
+		</nav>
+	</div>
+	<div class = "content">
+		<ul class = "title_content">全部任务</ul>
+	</div>
+</div>
+</body>
+</html>

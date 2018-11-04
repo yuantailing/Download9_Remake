@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Download9</title>
+<link href="css/template_task.css" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#task_tick_a").click(function(){
+		if ($("#task_tick_a").is(":checked")) {
+			$("input[type='checkbox']").each(function(){
+				this.checked = true;
+			});
+		}
+		else {
+			$("input[type='checkbox']").each(function(){
+				this.checked = false;
+			});
+		}
+	});
+	$("input").click(function(){
+		$allchecked = true;
+		$("input[type='checkbox']").each(function(){
+			if ($(this).attr("id") != "task_tick_a") {
+				if (!($(this).is(":checked"))) {
+					$allchecked = false;
+				}
+			}
+		});
+		if ($allchecked) {
+			$("#task_tick_a").each(function(){
+				this.checked = true;
+			});
+		}
+		else {
+			$("#task_tick_a").each(function(){
+				this.checked = false;
+			});
+		}
+	});
+});
+</script>
+<body>
+<div class = "container">
+	<div class = "header">
+		<nav>
+			<ul class = "ul_left">
+				<li class = "title"><a href = "">Download9</a></li>
+			</ul>
+			<ul class = "ul_right">
+				<li>任务数量：0/10</li>
+				<li>已用空间：0/20480MB</li>
+				<li class = "info_user"><img src = "images/profile.png"></li>
+			</ul>
+		</nav>
+	</div>
+	<div class = "dashboard">
+		<nav>
+			<ul class = "dashboard_all">
+				<a href = ""><li class = "title_work_onpage">任务</li></a>
+				<ul class = "sub_menu_onpage">
+					<a href = ""><li class = "sub_option_onpage">全部任务</li></a>
+					<a href = ""><li class = "sub_option">正在下载</li></a>
+					<a href = ""><li class = "sub_option">已完成任务</li></a>
+				</ul>
+				<a href = ""><li class = "title_work">新建任务</li></a>
+				<ul class = "sub_menu">
+					<a href = ""><li class = "sub_option">新建链接任务</li></a>
+					<a href = ""><li class = "sub_option">新建BT任务</li></a>
+				</ul>
+			</ul>
+		</nav>
+	</div>
+	<div class = "content">
+		<ul class = "title_content">全部任务</ul>
+		<form method = "get" action = "template_task.html">
+			<div class = "table_top">
+				<div class = "operation">
+					<input type = "submit" id = "operation_delete" value = "删除">
+					<input type = "submit" id = "operation_download" value = "取回本地">
+				</div>
+				<p class = "number_all">1个任务正在下载</p>
+			</div>
+			<table class = "task">
+				<tbody>
+					<tr class = "task_line_0">
+						<td class = "task_tick"><input id = "task_tick_a" type = "checkbox"></td>
+						<td class = "task_id">#</td>
+						<td class = "task_state">状态</td>
+						<td class = "task_filename"><span>文件名</span></td>
+						<td class = "task_size">大小</td>
+						<td class = "task_process">进度</td>
+						<td class = "task_velocity">下载速度</td>
+						<td class = "task_timeremain">剩余时间</td>
+						<td class = "task_date">任务创建日期</td>
+					</tr>
+					<tr class = "task_line_1">
+						<td class = "task_tick"><input id = "task_tick_1" type = "checkbox"></td>
+						<td class = "task_id">1</td>
+						<td class = "task_state">已完成</td>
+						<td class = "task_filename">1.txt</td>
+						<td class = "task_size">300KB</td>
+						<td class = "task_process">100%</td>
+						<td class = "task_velocity"></td>
+						<td class = "task_timeremain"></td>
+						<td class = "task_date">2018-10-17</td>
+					</tr>
+					<tr class = "task_line_0">
+						<td class = "task_tick"><input id = "task_tick_2" type = "checkbox"></td>
+						<td class = "task_id">2</td>
+						<td class = "task_state">正在下载</td>
+						<td class = "task_filename">2.iso</td>
+						<td class = "task_size">1.46GB</td>
+						<td class = "task_process">53%</td>
+						<td class = "task_velocity">600KB/s</td>
+						<td class = "task_timeremain">01:44:00</td>
+						<td class = "task_date">2018-10-01</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

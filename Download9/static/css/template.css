@@ -1,0 +1,210 @@
+.container {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+.header {
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	background-color: #52BAD5;
+}
+
+body {
+	margin: 0px;
+}
+
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.title {
+	font-size: 25px;
+}
+
+p {
+	margin: 0px;
+}
+
+.header nav {
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+
+li {
+	list-style: none;
+}
+
+.header nav ul {
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.dashboard {
+	position: fixed;
+	width: 170px;
+	height: 100%;
+	background-color: #505050;
+}
+
+.title_work {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 20px;
+	margin: 0px;
+	font-size: 18px;
+}
+
+.title_work:hover {
+	color: #52BAD5;
+	background-color: #303030;
+}
+
+.dashboard nav ul li {
+	margin-top: 10px;
+}
+
+.sub_menu {
+	display: none;
+	background-color: #303030;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	height: 100%;
+}
+
+.sub_option {
+	padding-left: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	color: #BBBBBB;
+}
+
+.dashboard_all {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 20px;
+}
+
+.sub_option:hover {
+	color: #52BAD5;
+}
+
+.sub_option_onpage {
+	font-weight: bold;
+	padding-left: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	color: #FFFFFF;
+}
+
+.title_work_onpage {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 20px;
+	margin: 0px;
+	font-size: 18px;
+	color: #FFFFFF;
+	background-color: #52BAD5;
+}
+
+.sub_menu_onpage {
+	background-color: #303030;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	height: 100%;
+}
+
+.content {
+	padding-left: 170px;
+	height: 100%;
+	width: auto;
+	background-color: #EBEBEB;
+}
+
+.title_content {
+	margin: 0px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	font-size: 30px;
+}
+
+.ul_left {
+	float: left;
+}
+
+.ul_right {
+	float: right;
+}
+
+.header nav ul li {
+	height: 50px;
+	line-height: 50px;
+	display: inline-block;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #FFFFFF;
+}
+
+.header img {
+	padding-top: 10px;
+	width: 30px;
+	height: 30px;
+}
+
+.ul_left li {
+	padding-left: 20px;
+}
+
+.ul_right li {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.info {
+	display: none;
+}
+
+.info_hover {
+	position: fixed;
+	width: 100%;
+	height: 30px;
+}
+
+.logout {
+	vertical-align: middle;
+	text-align: center;
+	float: right;
+	width: 150px;
+	height: 100%;
+	line-height: 100%;
+	background-color: #1890AF;
+}
+
+
+.logout p {
+	color: #FFFFFF;
+	line-height: 30px;
+	height: 30px;
+}
+
+.info_user {
+	
+}
+
+.info_user_hover {
+	background-color: #1890AF;
+}
