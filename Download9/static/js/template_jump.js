@@ -5,7 +5,12 @@ $(document).ready(function(){
 		$("#Dark").fadeOut(500);
 		$("#Dialog").slideUp(500);
 		setTimeout(function () {
-			location.href = $("#nexturl").text();
+			if ($("form").length > 0) {
+				$("form").submit();
+			}
+			else {
+				location.href = $("#nexturl").text();
+			}
         }, 400)
 	});
 	setTimeout('$("#Dark,#Dialog_close").click()', 3000);

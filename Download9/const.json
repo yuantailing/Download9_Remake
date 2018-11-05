@@ -4,8 +4,10 @@
       "WRONG" : "错误"
     },
     "CONTEXT" : {
-      "NOTEXIST": "您所访问的页面不存在",
-      "JUMPTOINDEX": "即将跳转至主页"
+      "NOTEXIST" : "您所访问的页面不存在",
+      "NEEDLOGIN" : "需要登陆",
+      "LOGINWRONG" : "账号或密码错误",
+      "JUMPTOINDEX" : "即将跳转至主页"
     }
   }
 }

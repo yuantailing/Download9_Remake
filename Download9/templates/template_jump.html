@@ -9,6 +9,14 @@
 <script type="text/javascript" src="/static/js/template_jump.js"></script>
 <body>
 <div class = "container">
+	{% if FORM %}
+		<form method = "POST" style = "display:none;" action = "{{ nexturl }}">
+			{% csrf_token %}
+			{% for key, value in FORM.items %}
+				<input id = "{{ key }}" name = "{{ key }}" value="{{ value }}"></input>
+			{% endfor %}
+		</form>
+	{% endif %}
 	<div id = "Dark"></div>
 	<div id = "Dialog">
 		<div id = "Dialog_Content">
