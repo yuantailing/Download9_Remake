@@ -13,5 +13,5 @@ $(document).ready(function(){
 			}
         }, 400)
 	});
-	setTimeout('$("#Dark,#Dialog_close").click()', 3000);
+	setTimeout('$("#Dark,#Dialog_close").click()', 5000);
 });

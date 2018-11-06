@@ -19,9 +19,10 @@ from Download9 import views as download9_views
 
 urlpatterns = [
     re_path(r'admin/', admin.site.urls),
-    re_path(r'^index/?$', download9_views.login),
+    re_path(r'^index/?$', download9_views.index),
+    re_path(r'^login/?$', download9_views.login),
     re_path(r'^check_login/?$', download9_views.check_login),
     re_path(r'^not_exist/?$', download9_views.not_exist),
-    re_path(r'^$', download9_views.index),
+    re_path(r'^$', download9_views.toindex),
     re_path(r'^.*$', download9_views.jump_to_not_exist),
 ]

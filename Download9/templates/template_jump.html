@@ -13,7 +13,7 @@
 		<form method = "POST" style = "display:none;" action = "{{ nexturl }}">
 			{% csrf_token %}
 			{% for key, value in FORM.items %}
-				<input id = "{{ key }}" name = "{{ key }}" value="{{ value }}"></input>
+				<input id = "{{ key }}" name = "{{ key }}" value="{{ value }}">
 			{% endfor %}
 		</form>
 	{% endif %}
