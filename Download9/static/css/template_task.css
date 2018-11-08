@@ -170,7 +170,43 @@ li {
 }
 
 .ul_right li {
+	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.info {
+	display: none;
+}
+
+.info_hover {
+	position: fixed;
+	width: 100%;
+	height: 30px;
+}
+
+.logout {
+	vertical-align: middle;
+	text-align: center;
+	float: right;
+	width: 150px;
+	height: 100%;
+	line-height: 100%;
+	background-color: #1890AF;
+}
+
+
+.logout p {
+	color: #FFFFFF;
+	line-height: 30px;
+	height: 30px;
+}
+
+.info_user {
+
+}
+
+.info_user_hover {
+	background-color: #1890AF;
 }
 
 .task_line_0 {
@@ -183,6 +219,10 @@ li {
 
 .task_state {
 	width: 85px;
+}
+
+.task_name {
+	width: 10%
 }
 
 .task_filename {

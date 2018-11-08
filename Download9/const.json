@@ -1,9 +1,11 @@
 {
   "HINT" : {
     "TITLE" : {
-      "WRONG" : "错误"
+      "WRONG" : "错误",
+      "SUCCESS" : "成功"
     },
     "CONTEXT" : {
+      "ALREADYLOGOUT" : "您已成功登出",
       "NOTEXIST" : "您所访问的页面不存在",
       "NEEDLOGIN" : "暂未登陆或登陆超时",
       "LOGINWRONG" : "账号或密码错误",
@@ -12,6 +14,6 @@
     }
   },
   "SESSION" : {
-    "LOGINTIME" : 10
+    "LOGINTIME" : 1200
   }
 }

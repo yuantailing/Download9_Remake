@@ -8,83 +8,88 @@
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/template_profile.js"></script>
 <script type="text/javascript" src="/static/js/template_task.js"></script>
+<script type="text/javascript">$.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});</script>
 <body>
 <div class = "container">
 	<div class = "header">
 		<nav>
 			<ul class = "ul_left">
-				<li class = "title"><a href = "">Download9</a></li>
+				<li class = "title"><a href = "/index">Download9</a></li>
 			</ul>
 			<ul class = "ul_right">
-				<li>任务数量：0/10</li>
-				<li>已用空间：0/20480MB</li>
-				<li>欢迎：admin</li>
-				<li id = "info_user" class = "info_user"><img src = "images/profile.png"></li>
+				<li>任务数量：{{ tasks|length }}/10</li>
+				<li>已用空间：/20480MB</li>
+				<li>欢迎：{{ username }}</li>
+				<li id = "info_user" class = "info_user"><img src = "/static/images/profile.png"></li>
 			</ul>
 		</nav>
+	</div>
+	<div id = "info" class = "info">
+		<div class = "logout">
+			<a href = "/logout"><p>退出登录</p></a>
+		</div>
 	</div>
 	<div class = "dashboard">
 		<nav>
 			<ul class = "dashboard_all">
-				<a href = ""><li class = "title_work_onpage">任务</li></a>
+				<a href = "/index/tasks"><li class = "title_work_onpage">任务</li></a>
 				<ul class = "sub_menu_onpage">
-					<a href = ""><li class = "sub_option_onpage">全部任务</li></a>
-					<a href = ""><li class = "sub_option">正在下载</li></a>
-					<a href = ""><li class = "sub_option">已完成任务</li></a>
+					<a href = "/index/tasks/all"><li class = "sub_option_onpage">全部任务</li></a>
+					<a href = "/index/tasks/downloading"><li class = "sub_option">正在下载</li></a>
+					<a href = "/index/tasks/completed"><li class = "sub_option">已完成任务</li></a>
 				</ul>
-				<a href = ""><li class = "title_work">新建任务</li></a>
+				<a href = "/index/new"><li class = "title_work">新建任务</li></a>
 				<ul class = "sub_menu">
-					<a href = ""><li class = "sub_option">新建链接任务</li></a>
-					<a href = ""><li class = "sub_option">新建BT任务</li></a>
+					<a href = "/index/new/newurl"><li class = "sub_option">新建链接任务</li></a>
+					<a href = "/index/new/newbt"><li class = "sub_option">新建BT任务</li></a>
 				</ul>
 			</ul>
 		</nav>
 	</div>
 	<div class = "content">
 		<ul class = "title_content">全部任务</ul>
-		<form method = "get" action = "template_task.html">
+		<form method = "get" action = "">
+			{% csrf_token %}
 			<div class = "table_top">
 				<div class = "operation">
 					<input type = "submit" id = "operation_delete" value = "删除">
 					<input type = "submit" id = "operation_download" value = "取回本地">
 				</div>
-				<p class = "number_all">1个任务正在下载</p>
+				<p class = "number_all">个任务正在下载</p>
 			</div>
 			<table class = "task">
 				<tbody>
-					<tr class = "task_line_0">
+					<tr class = "task_line_0" id = "task_line_head">
 						<td class = "task_tick"><input id = "task_tick_a" type = "checkbox"></td>
 						<td class = "task_id">#</td>
 						<td class = "task_state">状态</td>
-						<td class = "task_filename"><span>文件名</span></td>
+						<td class = "task_name">任务名</td>
+						<td class = "task_filename">文件名</td>
 						<td class = "task_size">大小</td>
 						<td class = "task_process">进度</td>
 						<td class = "task_velocity">下载速度</td>
 						<td class = "task_timeremain">剩余时间</td>
 						<td class = "task_date">任务创建日期</td>
 					</tr>
-					<tr class = "task_line_1">
-						<td class = "task_tick"><input id = "task_tick_1" type = "checkbox"></td>
-						<td class = "task_id">1</td>
-						<td class = "task_state">已完成</td>
-						<td class = "task_filename">1.txt</td>
-						<td class = "task_size">300KB</td>
-						<td class = "task_process">100%</td>
-						<td class = "task_velocity"></td>
-						<td class = "task_timeremain"></td>
-						<td class = "task_date">2018-10-17</td>
-					</tr>
-					<tr class = "task_line_0">
-						<td class = "task_tick"><input id = "task_tick_2" type = "checkbox"></td>
-						<td class = "task_id">2</td>
-						<td class = "task_state">正在下载</td>
-						<td class = "task_filename">2.iso</td>
-						<td class = "task_size">1.46GB</td>
-						<td class = "task_process">53%</td>
-						<td class = "task_velocity">600KB/s</td>
-						<td class = "task_timeremain">01:44:00</td>
-						<td class = "task_date">2018-10-01</td>
-					</tr>
+					{% for x in tasks %}
+						{% if forloop.counter|divisibleby:2 %}
+						<tr class = "task_line_0" id = "task_line_{{ forloop.counter }}">
+						{% else %}
+						<tr class = "task_line_1" id = "task_line_{{ forloop.counter }}">
+						{% endif %}
+							<td class = "task_tick"><input id = "task_tick_{{ forloop.counter }}" type = "checkbox"></td>
+							<td class = "task_id">{{ forloop.counter }}</td>
+							<td class = "task_state"></td>
+							<td class = "task_name">{{ x.taskname }}</td>
+							<td class = "task_filename"></td>
+							<td class = "task_size"></td>
+							<td class = "task_process"></td>
+							<td class = "task_velocity"></td>
+							<td class = "task_timeremain"></td>
+							<td class = "task_date"></td>
+							<td class = "task_gid" style="display:none;">{{ x.gid }}</td>
+						</tr>
+					{% endfor %}
 				</tbody>
 			</table>
 		</form>
