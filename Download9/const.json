@@ -1,19 +1,56 @@
 {
-  "HINT" : {
-    "TITLE" : {
-      "WRONG" : "错误",
-      "SUCCESS" : "成功"
+  "Hint" : {
+    "Title" : {
+      "Wrong" : "错误",
+      "Success" : "成功"
     },
-    "CONTEXT" : {
-      "ALREADYLOGOUT" : "您已成功登出",
-      "NOTEXIST" : "您所访问的页面不存在",
-      "NEEDLOGIN" : "暂未登陆或登陆超时",
-      "LOGINWRONG" : "账号或密码错误",
-      "JUMPTOINDEX" : "即将跳转至主页",
-      "JUMPTOLOGIN" : "请重新登录"
+    "Context" : {
+      "UploadBTFileTooLarge" : "种子文件过大",
+      "UrlError" : "不可识别的链接/文件",
+      "PleaseChange" : "请更换",
+      "PleaseChangeFile" : "请更换种子文件",
+      "UploadBTFileEmpty" : "上传种子文件为空",
+      "PleaseRetry" : "请重试",
+      "AlreadyLogout" : "您已成功登出",
+      "NotExist" : "您所访问的页面不存在",
+      "NeedLogin" : "暂未登陆或登陆超时",
+      "LoginWrong" : "账号或密码错误",
+      "JumpToIndex" : "即将跳转至主页",
+      "JumpToLogin" : "请重新登录",
+      "DownloadToolError" : "下载工具出现问题",
+      "NotCompleted" : "任务还未下载完成",
+      "PleaseWaitForCompletion" : "请耐心等候任务下载完成再尝试",
+      "Contact" : "请联系管理员",
+      "OperationSuccess" : "操作成功",
+      "CloseSoon" : "此窗口将在5秒后关闭",
+      "TaskNameRepeated" : "此任务名已被使用",
+      "PleaseChangeTaskName" : "请换一个任务名",
+      "TaskNumberExceeded" : "您创建的任务数太多啦",
+      "MemoryUseExceeded" : "您使用的空间过多",
+      "ForcePaused" : "已强制暂停所有任务，请尝试删除一些任务"
     }
   },
-  "SESSION" : {
-    "LOGINTIME" : 1200
+  "Session" : {
+    "_comment" : "LoginTime",
+    "LoginTime" : 1200
+  },
+  "Account9" : {
+    "client_id" : "IdW9aZKStu4PsXSt8-gF5Ba4bU8",
+    "client_secret" : "1ZNCRTtgEUn7ZQbTewZk"
+  },
+  "MemoryLimit" : 10485760,
+  "TaskNumberLimit" : 5,
+  "ServerRoot" : "http://127.0.0.1:8000",
+  "DownloadRoot" : "/home/tgopknight/",
+  "AriaAddress" : "http://localhost:6800/jsonrpc",
+  "AutoDelete" : {
+    "Log" : "/home/tgopknight/tmp/download9.log",
+    "Time" : "08 03 * * *"
+  },
+  "Database" : {
+    "Host" : "localhost",
+    "Username" : "test",
+    "Password" : "123456",
+    "Database" : "download9"
   }
 }

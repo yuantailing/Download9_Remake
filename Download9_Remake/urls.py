@@ -17,16 +17,24 @@ from django.contrib import admin
 from django.urls import re_path
 from Download9 import views as download9_views
 
+'''re_path(r'^account9_login/?$', download9_views.account9_login),'''
+
 urlpatterns = [
     re_path(r'admin/', admin.site.urls),
+    re_path(r'^init/?$', download9_views.init),
     re_path(r'^index/?$', download9_views.index),
+    re_path(r'^account9_redirect$', download9_views.account9_redirect),
     re_path(r'^index/(.+)/?$', download9_views.index),
     re_path(r'^login/?$', download9_views.login),
     re_path(r'^check_login/?$', download9_views.check_login),
+    re_path(r'^account9_login/?$', download9_views.account9_login),
     re_path(r'^not_exist/?$', download9_views.not_exist),
     re_path(r'^logout/?$', download9_views.logout),
-    re_path(r'^new_url_task/?$', download9_views.newurltask),
+    re_path(r'^new_(url|bt)_task/?$', download9_views.newtask),
     re_path(r'^get_task_state/?$', download9_views.gettaskstate),
+    re_path(r'^get_overall_state/?$', download9_views.getoverallstate),
+    re_path(r'^(delete|pause|continue|switch)_task/?$', download9_views.optask),
+    re_path(r'^download_task/task_name=(.+)/gid=(.+)/?$', download9_views.downloadtask),
     re_path(r'^$', download9_views.toindex),
     re_path(r'^.*$', download9_views.jump_to_not_exist),
 ]

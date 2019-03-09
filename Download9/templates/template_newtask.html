@@ -4,21 +4,35 @@
 <meta charset="utf-8">
 <title>Download9</title>
 <link href="/static/css/template_newtask.css" rel="stylesheet" type="text/css">
+<link href="/static/css/template_dialog.css" rel="stylesheet" type="text/css">
 </head>
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/template_profile.js"></script>
 <script type="text/javascript" src="/static/js/template_newtask.js"></script>
+<script type="text/javascript" src="/static/js/template_displayhint.js"></script>
 <script type="text/javascript">$.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});</script>
 <body>
 <div class = "container">
+	<div id = "Dark"></div>
+	<div id = "Dialog">
+		<div id = "Dialog_Content">
+			<span id = "Dialog_close">&times;</span>
+			<h2 id = "nexturl" style = "display: none"></h2>
+			<h1></h1>
+			<hr />
+			<p></p>
+		</div>
+	</div>
 	<div class = "header">
 		<nav>
 			<ul class = "ul_left">
 				<li class = "title"><a href = "/index">Download9</a></li>
 			</ul>
 			<ul class = "ul_right">
-				<li>任务数量：{{ tasks|length }}/10</li>
-				<li>已用空间：/20480MB</li>
+				<li id = "task_number">任务数量：/{{ tasknumberlimit }}</li>
+                <p id = "task_number_limit" style = "display: none">{{ tasknumberlimit }}</p>
+				<li id = "memory_used">已用空间：/{{ MemoryLimit }}MB</li>
+                <p id = "memory_used_limit" style = "display: none">{{ MemoryLimit }}</p>
 				<li>欢迎：{{ username }}</li>
 				<li id = "info_user" class = "info_user"><img src = "/static/images/profile.png"></li>
 			</ul>
@@ -40,19 +54,25 @@
 				</ul>
 				<a href = "/index/new"><li class = "title_work_onpage">新建任务</li></a>
 				<ul class = "sub_menu_onpage">
-					<a href = "/index/new/newurl"><li class = "sub_option_onpage">新建链接任务</li></a>
-					<a href = "/index/new/newbt"><li class = "sub_option">新建BT任务</li></a>
+					<a href = "/index/new/newurl"><li class = "sub_option{% ifequal title '新建链接任务' %}_onpage{% endifequal %}">新建链接任务</li></a>
+					<a href = "/index/new/newbt"><li class = "sub_option{% ifequal title '新建BT任务' %}_onpage{% endifequal %}">新建BT任务</li></a>
+                    <a href = "/index/new/newmeta"><li class = "sub_option{% ifequal title '新建磁力任务' %}_onpage{% endifequal %}">新建磁力任务</li></a>
 				</ul>
 			</ul>
 		</nav>
 	</div>
 	<div class = "content">
-		<ul class = "title_content">新建链接任务</ul>
+		<ul class = "title_content">{{ title }}</ul>
 		<form id = "submit_form">
-			<p>文件名：</p>
-			<input type = "search" id = "task_name" name = "task_name" placeholder = "为空时默认取下载文件名">
-			<p>链接：</p>
-			<textarea id = "task_link" name = "task_link" placeholder = "下载地址（支持HTTP/HTTPS）"></textarea>
+        <input type="hidden" id = "csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+			<p>任务名：</p>
+			<input type = "search" id = "task_name" name = "task_name">
+			<p>{% ifequal title '新建链接任务' %}链接{% else %}{% ifequal title '新建BT任务' %}BT文件{% else %}磁力链接{% endifequal %}{% endifequal %}</p>
+            {% ifequal title '新建BT任务' %}
+                <input type="file" id = "task_link" name = "task_link">
+            {% else %}
+                <textarea id = "task_link" name = "task_link" placeholder = "{% ifequal title '新建链接任务' %}下载地址（支持HTTP/HTTPS）{% else %}磁力链接{% endifequal %}"></textarea>
+            {% endifequal %}
 			<input type = "button" id = "submit_button" value = "确定">
 		</form>
 	</div>

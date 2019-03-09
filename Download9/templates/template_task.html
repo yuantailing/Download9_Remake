@@ -4,21 +4,35 @@
 <meta charset="utf-8">
 <title>Download9</title>
 <link href="/static/css/template_task.css" rel="stylesheet" type="text/css">
+<link href="/static/css/template_dialog.css" rel="stylesheet" type="text/css">
 </head>
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/template_profile.js"></script>
 <script type="text/javascript" src="/static/js/template_task.js"></script>
+<script type="text/javascript" src="/static/js/template_displayhint.js"></script>
 <script type="text/javascript">$.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});</script>
 <body>
 <div class = "container">
+    <div id = "Dark"></div>
+	<div id = "Dialog">
+		<div id = "Dialog_Content">
+			<span id = "Dialog_close">&times;</span>
+			<h2 id = "nexturl" style = "display: none"></h2>
+			<h1></h1>
+			<hr />
+			<p></p>
+		</div>
+	</div>
 	<div class = "header">
 		<nav>
 			<ul class = "ul_left">
 				<li class = "title"><a href = "/index">Download9</a></li>
 			</ul>
 			<ul class = "ul_right">
-				<li>任务数量：{{ tasks|length }}/10</li>
-				<li>已用空间：/20480MB</li>
+				<li id = "task_number">任务数量：/{{ tasknumberlimit }}</li>
+                <p id = "task_number_limit" style = "display: none">{{ tasknumberlimit }}</p>
+				<li id = "memory_used">已用空间：/{{ MemoryLimit }}MB</li>
+                <p id = "memory_used_limit" style = "display: none">{{ MemoryLimit }}</p>
 				<li>欢迎：{{ username }}</li>
 				<li id = "info_user" class = "info_user"><img src = "/static/images/profile.png"></li>
 			</ul>
@@ -34,9 +48,9 @@
 			<ul class = "dashboard_all">
 				<a href = "/index/tasks"><li class = "title_work_onpage">任务</li></a>
 				<ul class = "sub_menu_onpage">
-					<a href = "/index/tasks/all"><li class = "sub_option_onpage">全部任务</li></a>
-					<a href = "/index/tasks/downloading"><li class = "sub_option">正在下载</li></a>
-					<a href = "/index/tasks/completed"><li class = "sub_option">已完成任务</li></a>
+					<a href = "/index/tasks/all"><li class = "sub_option{% ifequal title '全部任务' %}_onpage{% endifequal %}">全部任务</li></a>
+					<a href = "/index/tasks/downloading"><li class = "sub_option{% ifequal title '正在下载' %}_onpage{% endifequal %}">正在下载</li></a>
+					<a href = "/index/tasks/completed"><li class = "sub_option{% ifequal title '已完成任务' %}_onpage{% endifequal %}">已完成任务</li></a>
 				</ul>
 				<a href = "/index/new"><li class = "title_work">新建任务</li></a>
 				<ul class = "sub_menu">
@@ -47,15 +61,18 @@
 		</nav>
 	</div>
 	<div class = "content">
-		<ul class = "title_content">全部任务</ul>
-		<form method = "get" action = "">
+		<ul class = "title_content">{{ title }}</ul>
+		<form method = "POST" action = "">
 			{% csrf_token %}
 			<div class = "table_top">
 				<div class = "operation">
-					<input type = "submit" id = "operation_delete" value = "删除">
-					<input type = "submit" id = "operation_download" value = "取回本地">
+                    <input type = "button" id = "operation_pause" value = "暂停">
+                    <input type = "button" id = "operation_continue" value = "继续">
+					<input type = "button" id = "operation_delete" value = "删除">
+					<input type = "button" id = "operation_download" value = "取回本地">
+                    <input type = "button" id = "operation_switch" value = "切换属性">
 				</div>
-				<p class = "number_all">个任务正在下载</p>
+				<p id = "download_number">个任务正在下载</p>
 			</div>
 			<table class = "task">
 				<tbody>
@@ -70,6 +87,7 @@
 						<td class = "task_velocity">下载速度</td>
 						<td class = "task_timeremain">剩余时间</td>
 						<td class = "task_date">任务创建日期</td>
+                        <td class = "task_attr">属性</td>
 					</tr>
 					{% for x in tasks %}
 						{% if forloop.counter|divisibleby:2 %}
@@ -86,7 +104,8 @@
 							<td class = "task_process"></td>
 							<td class = "task_velocity"></td>
 							<td class = "task_timeremain"></td>
-							<td class = "task_date"></td>
+							<td class = "task_date">{{ x.date }}</td>
+                            <td class = "task_attr"></td>
 							<td class = "task_gid" style="display:none;">{{ x.gid }}</td>
 						</tr>
 					{% endfor %}

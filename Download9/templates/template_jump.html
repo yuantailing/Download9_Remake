@@ -6,11 +6,12 @@
 <link href="/static/css/template_dialog.css" rel="stylesheet" type="text/css">
 </head>
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/template_displayhint.js"></script>
 <script type="text/javascript" src="/static/js/template_jump.js"></script>
 <body>
 <div class = "container">
 	{% if FORM %}
-		<form method = "POST" style = "display:none;" action = "{{ nexturl }}">
+		<form id = "hint_form" method = "POST" style = "display:none;" action = "{{ nexturl }}">
 			{% csrf_token %}
 			{% for key, value in FORM.items %}
 				<input id = "{{ key }}" name = "{{ key }}" value="{{ value }}">
@@ -22,6 +23,7 @@
 		<div id = "Dialog_Content">
 			<span id = "Dialog_close">&times;</span>
 			<p id = "nexturl" style = "display: none">{{ nexturl }}</p>
+            <p id = "close" style = "display: none">{{ close }}</p>
 			<h1>{{ title }}</h1>
 			<hr />
 			{% for x in context %}

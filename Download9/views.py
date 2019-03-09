@@ -1,169 +1,160 @@
-import json, os
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-
 # Create your views here.
 
-constjson = open(os.path.join(os.path.dirname(__file__), 'const.json'), 'r', encoding='utf8')
-const = json.load(constjson)
-hinttitle = const["HINT"]["TITLE"]
-hintcontext = const["HINT"]["CONTEXT"]
+from Download9.view import pageresponse as PageResponse
+from Download9.view import jsonresponse as JsonResponse
+from Download9.view import account as Account
+from Download9.view import const as Const
+from Download9.view import aria as Aria
+from Download9.view import ajax as Ajax
+from Download9.view import control as Control
+from Download9.view import database as Database
+from Download9.view import operation as Operation
 
-def gettaskstate(request):
-    if request.is_ajax():
-        import json
-        if check_session(request):
-            usr = GETusernameBYsession(request);
-            try:
-                REQUEST = request
-                from urllib import request
-                from Download9.models import task
-                import re
-                jsonreq = json.dumps({'jsonrpc': '2.0',
-                                      'id': usr + str("@") + str(REQUEST.POST["task_name"]),
-                                      'method': 'aria2.tellStatus',
-                                      'params': [REQUEST.POST["gid"],
-                                                 ['totalLength',
-                                                  'completedLength',
-                                                  'status',
-                                                  'downloadSpeed']]}).encode('utf-8')
-                c = json.loads(request.urlopen('http://localhost:6800/jsonrpc', jsonreq).read().decode('utf-8'))
-                jsonreq = json.dumps({'jsonrpc': '2.0',
-                                      'id': usr + str("@") + str(REQUEST.POST["task_name"]),
-                                      'method': 'aria2.getFiles',
-                                      'params': [REQUEST.POST["gid"]]}).encode('utf-8')
-                d = json.loads(request.urlopen('http://localhost:6800/jsonrpc', jsonreq).read().decode('utf-8'))
-                filename = os.path.basename(d['result'][0]['path']);
-                req = {'result': 'success',
-                       'workid': str(REQUEST.POST['workid']),
-                       'state': c['result']['status'],
-                       'size': c['result']['totalLength'],
-                       'velocity': c['result']['downloadSpeed'],
-                       'filename': filename}
-                return HttpResponse(json.dumps(req))
-            except:
-                return HttpResponse(json.dumps({'result': 'fail'}))
-        else:
-            return HttpResponse(json.dumps({'result': 'session_failed'}))
-    else:
-        return not_exist(request)
+def account9_login(request):
+    return PageResponse.jump_to_account9()
 
-def logout(request):
-    request.session.flush()
-    req = {"title": hinttitle["SUCCESS"], "context": [hintcontext["ALREADYLOGOUT"]],
-           "nexturl": "/login"}
-    return render(request, "template_jump.html", req)
+def account9_redirect(request):
+    return Account.account9_login(request)
 
-def taskpage(request):
-    from Download9.models import task
-    x = GETusernameBYsession(request)
-    y = task.objects.filter(username=x)
-    tasks = []
-    for i in y:
-        tasks.append({"taskname": i.taskname, "gid": i.gid})
-    req = {"username": x, "tasks": tasks}
-    return render(request, "template_task.html", req);
-
-def newpage(request):
-    from Download9.models import task
-    x = GETusernameBYsession(request)
-    y = task.objects.filter(username=x)
-    tasks = []
-    for i in y:
-        tasks.append({"gid": i.gid})
-    req = {"username": x, "tasks": tasks}
-    return render(request, "template_newtask.html", req);
+def init(request):
+    from Download9 import init_database
+    return PageResponse.jump_to_index()
 
 def login(request):
-    if check_session(request):
-        return HttpResponseRedirect("/index")
-    if (request.method == "POST"):
-        try:
-            assert request.POST.__contains__("username")
-            assert request.POST.__contains__("password")
-            return render(request, "template_login.html", {"username": request.POST["username"], "password": request.POST["password"]})
-        except:
-            return render(request, "template_login.html", {"username": "", "password": ""})
-    return render(request, "template_login.html", {"username": "", "password": ""})
-
-def check_session(request):
-    try:
-        assert request.session.__contains__("memberid")
-        request.session.set_expiry(const["SESSION"]["LOGINTIME"])
-        return True
-    except:
-        return False
-
-def GETusernameBYsession(request):
-    from Download9.models import account
-    return account.objects.get(id=request.session["memberid"]).username
+    return Account.login(request)
 
 def check_login(request):
-    if (request.method == "POST"):
-        try:
-            from Download9.models import account
-            from Download9.getmd5 import getmd5
-            pwd = getmd5(request.POST["password"])
-            x = account.objects.get(username=request.POST["username"])
-            assert x.password == pwd
-            request.session["memberid"] = x.id
-            request.session.set_expiry(const["SESSION"]["LOGINTIME"])
-            return HttpResponseRedirect("/index")
-        except:
-            req = {"title": hinttitle["WRONG"], "context": [hintcontext["LOGINWRONG"], hintcontext["JUMPTOLOGIN"]],
-                   "nexturl": "/login",
-                   "FORM": {"username": request.POST["username"], "password": request.POST["password"]}}
-            return render(request, "template_jump.html", req)
-    else:
-        return index(request)
+    return Account.check_login(request)
 
-def index(request, para1 = ""):
-    print(para1)
-    if check_session(request):
-        import re
-        if re.match(r'^new', para1):
-            return newpage(request)
-        else:
-            return taskpage(request)
-    else:
-        req = {"title": hinttitle["WRONG"], "context": [hintcontext["NEEDLOGIN"], hintcontext["JUMPTOLOGIN"]],
-               "nexturl": "/login"}
-        return render(request, "template_jump.html", req)
+def logout(request):
+    return Account.logout(request)
 
-def toindex(request):
-    return HttpResponseRedirect("/index")
+def gettaskstate(request):
+    return Ajax.get_tasks_state(request)
 
-def not_exist(request):
-    req = {"title": hinttitle["WRONG"], "context": [hintcontext["NOTEXIST"], hintcontext["JUMPTOINDEX"]],
-           "nexturl": "/index"}
-    return render(request, "template_jump.html", req)
+def getoverallstate(request):
+    return Ajax.get_overall_state(request)
+
+def optask(request, method = ""):
+    return Operation.optask(request, method)
+
+def downloadtask(request, task_name = "", gid = ""):
+    return Operation.download_task(request, task_name, gid)
 
 def jump_to_not_exist(request):
-    return HttpResponseRedirect("/not_exist")
+    return PageResponse.jump_to_not_exist()
 
-def newurltask(request):
-    print("newurltest")
-    if request.is_ajax():
-        import json
-        if check_session(request):
-            usr = GETusernameBYsession(request);
-            print("output1")
-            try:
-                REQUEST = request
-                from urllib import request
-                from Download9.models import task
-                jsonreq = json.dumps({'jsonrpc': '2.0',
-                                      'id': usr+str("@")+str(REQUEST.POST["task_name"]),
-                                      'method': 'aria2.addUri',
-                                      'params': [[REQUEST.POST["task_link"]]]}).encode('utf-8')
-                c = json.loads(request.urlopen('http://localhost:6800/jsonrpc', jsonreq).read().decode('utf-8'))
-                task.objects.create(username=usr, gid=c['result'], taskname=str(REQUEST.POST["task_name"]))
-                return HttpResponse(json.dumps({"result": "success"}))
-            except:
-                return HttpResponse(json.dumps({"result": "fail"}))
+def taskpage(request, para1 = ""):
+    '''print(para1)'''
+    if (para1[-1:] == "/"):
+        para1 = para1[:-1]
+    import re
+    usr = Control.get_username_by_session(request)
+    y = Database.get_all("task", {"username": usr})
+    tasks = []
+    TITLE = "全部任务"
+    if (re.match(r'^tasks/downloading$', para1)):
+        TITLE = "正在下载"
+    if (re.match(r'^tasks/completed$', para1)):
+        TITLE = "已完成任务"
+
+    for x in y:
+        add = True
+        if (re.match(r'^tasks/downloading$', para1)):
+            req = Aria.get_task_state(usr, x)
+            if not(req['state'] == 'active'):
+                add = False
+
+        if (re.match(r'^tasks/completed$', para1)):
+            req = Aria.get_task_state(usr, x)
+            if not(req['state'] == 'complete'):
+                add = False
+
+        if (add):
+            tasks.append({"taskname": x[Database.id("task", "taskname")],
+                          "gid": x[Database.id("task", "gid")],
+                          "date": x[Database.id("task", "createtime")]})
+
+    '''print(TITLE)'''
+    return PageResponse.task_page(request, usr, TITLE, tasks)
+
+def newpage(request, para1):
+    usr = Control.get_username_by_session(request)
+    import re
+    TITLE = "新建链接任务"
+    if (re.match(r'^new/newbt/?$', para1)):
+        TITLE = "新建BT任务"
+    elif (re.match(r'^new/newmeta/?$', para1)):
+        TITLE = "新建磁力任务"
+    y = Database.get_all("task", {"username": usr})
+    tasks = []
+    for i in y:
+        tasks.append({"gid": i[Database.id("task", "gid")]})
+    return PageResponse.new_task_page(request, usr, TITLE, tasks)
+
+def index(request, para1 = ""):
+    '''print(para1)'''
+    if Control.check_session(request):
+        import re
+        if re.match(r'^new(|/(newurl|newbt|newmeta))/?$', para1):
+            return newpage(request, para1)
+        elif re.match(r'^(|tasks(/(all|downloading|completed))?)/?$', para1):
+            return taskpage(request, para1)
         else:
-            print("output2")
-            return HttpResponse(json.dumps({"result": "session_failed"}))
+            return PageResponse.jump_to_not_exist()
     else:
-        print("output3")
-        return not_exist(request)
+        return PageResponse.session_failed(request)
+
+def toindex(request):
+    return PageResponse.jump_to_index()
+
+def not_exist(request):
+    return PageResponse.page_not_exist(request)
+
+def newtask(request, para1):
+    if request.is_ajax():
+        if Control.check_session(request):
+            usr = Control.get_username_by_session(request)
+            y = Database.get_all("task", {"username": usr})
+
+            if (Control.check_memoryuse(request) == -1):
+                return JsonResponse.memory_limit_exceeded()
+
+            if len(y) > Const.TaskNumberLimit:
+                assert 0
+            elif len(y) == Const.TaskNumberLimit:
+                return JsonResponse.task_number_exceeded()
+
+            for x in y:
+                if (x[Database.id("task", "taskname")] == request.POST["task_name"]):
+                    return JsonResponse.task_name_repeated()
+
+            try:
+                import base64
+                if (para1 == 'bt'):
+                    btfile = request.FILES.get("task_link", None)
+                    if not btfile:
+                        return JsonResponse.upload_btfile_empty()
+                    if (btfile.multiple_chunks()):
+                        return JsonResponse.upload_btfile_toolarge()
+                    else:
+                        bt = base64.b64encode(btfile.read()).decode("utf-8")
+                        c = Aria.add_other_task(usr, request.POST["task_name"], bt, "aria2.addTorrent")
+                elif (para1 == 'meta'):
+                    metalink = base64.b64decode(request.POST["task_link"])
+                    c = Aria.add_other_task(usr, request.POST["task_name"], metalink, "aria2.addMetalink")
+                else:
+                    c = Aria.add_url_task(usr, request.POST["task_name"], request.POST["task_link"])
+                import time as Time
+                Database.insert("task", {"username": usr,
+                                         "gid": c["result"],
+                                         "taskname": str(request.POST["task_name"]),
+                                         "createtime": Time.strftime('%Y-%m-%d', Time.localtime(Time.time())),
+                                         "attr": 0})
+                return JsonResponse.operation_success()
+            except:
+                return JsonResponse.download_tool_error()
+        else:
+            return JsonResponse.session_failed()
+    else:
+        return PageResponse.jump_to_not_exist()

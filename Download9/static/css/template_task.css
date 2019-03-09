@@ -291,7 +291,7 @@ li {
 	padding: 0px;
 }
 
-#operation_delete {
+#operation_delete, #operation_continue, #operation_pause {
 	width: 50px;
 }
 
@@ -318,7 +318,7 @@ li {
 	cursor: pointer;
 }
 
-#operation_download {
+#operation_download, #operation_switch {
 	width: 80px;
 }
 
@@ -329,6 +329,6 @@ li {
 	vertical-align: top;
 }
 
-.number_all {
+#download_number {
 	float: right;
 }
