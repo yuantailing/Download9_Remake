@@ -60,14 +60,12 @@ def download_task(request, task_name, gid):
                 return PageResponse.not_completed()
 
             filedir = Aria.get_filename(usr, task_name, gid)
-            '''print(filedir)'''
-            '''if (len(filedir) == 1):
+            if (len(filedir) == 1):
                 return PageResponse.file_download(filedir[0]["path"])
-            else:'''
-            dirname = Const.DownloadRoot + 'aria2cdownload/' + usr + '/task_' + task_name
-            '''print('zip -r -1 %s.zip %s/' % (dirname, dirname))'''
-            os.system('zip -r -1 %s.zip %s/' % (dirname, dirname))
-            return PageResponse.file_download(dirname + '.zip')
+            else:
+                dirname = Const.DownloadRoot + 'aria2cdownload/' + usr + '/'
+                os.system('tar zcvf %s.tar.gz -C %s %s' % (dirname + 'task_' + task_name, dirname, 'task_' + task_name))
+                return PageResponse.file_download(dirname + 'task_' + task_name + '.tar.gz')
         except:
             return PageResponse.download_tool_error()
     else:
