@@ -8,30 +8,54 @@ def getinfo(code):
     req = {"client_id" : Const.Const["Account9"]["client_id"],
            "client_secret" : Const.Const["Account9"]["client_secret"],
            "code" : code}
+    '''printf('    a9test_step0')'''
     res = json.loads(requests.post(url="https://accounts.net9.org/api/access_token",
                                    params=req,
                                    headers={'Content-Type': 'application/x-www-form-urlencoded'}).text)
+    '''printf('    a9test_step1')'''
     ret = requests.get(url="https://accounts.net9.org/api/userinfo",
                        params={"access_token": res["access_token"]})
+    '''printf('    a9test_step2')'''
     return json.loads(ret.text)
+
+'''
+def printf(s):
+    f = open('/home/dwn9/Download9_Remake/debug.log', 'a')
+    f.write(s)
+    f.write('\n')
+    f.close()
+'''
 
 def account9_login(request):
     if Control.check_session(request):
         return PageResponse.jump_to_index()
     if (request.method == "GET"):
+        '''
+        printf('')
+        printf('a9test_begin')
+        '''
         assert request.GET.__contains__("code")
+        '''printf('a9test_start_get_info')'''
         ret = getinfo(request.GET["code"])
+        '''printf('a9test_end_get_info')'''
         try:
+            '''printf('a9test_try_read_old_account')'''
             Database.find_single("account", {"username": ret["user"]["name"], "password": ret["user"]["password"]})
+            '''printf('a9test_start_setting_session')'''
             request.session["MemberName"] = ret["user"]["name"]
             request.session.set_expiry(Const.LoginTime)
+            '''printf('a9test_auth_over')'''
             return PageResponse.login_success(request)
         except:
+            '''printf('a9test_try_inser_new_account')'''
             Database.insert("account", {"username": ret["user"]["name"], "password": ret["user"]["password"], "memoryused": 0})
+            '''printf('a9test_start_setting_session')'''
             request.session["MemberName"] = ret["user"]["name"]
             request.session.set_expiry(Const.LoginTime)
+            '''printf('a9test_auth_over')'''
             return PageResponse.login_success(request)
     else:
+        '''printf('a9test_end:get_session failed')'''
         return PageResponse.jump_to_not_exist()
 
 def login(request):

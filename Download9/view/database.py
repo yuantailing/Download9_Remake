@@ -6,10 +6,7 @@ PASSWD = DatabaseInfo["Password"]
 DB = DatabaseInfo["Database"]
 CHARSET = "utf8"
 
-db = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWD, db=DB, charset=CHARSET)
-
 import threading
-lock = threading.Lock()
 
 def id(Table, Column):
     if (Table == "account"):
@@ -38,6 +35,8 @@ def id(Table, Column):
         assert 0
 
 def run(Str, NeedResult = True):
+    db = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWD, db=DB, charset=CHARSET)
+    lock = threading.Lock()
     lock.acquire()
     cursor = db.cursor()
     try:
