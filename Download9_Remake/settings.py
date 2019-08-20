@@ -68,6 +68,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -127,12 +128,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIR = {
     ('css', os.path.join(STATIC_URL, 'css').replace('\\', '/')),
-    ('images', os.path.join(STATIC_URL, 'images').replace('\\','/')),
-    ('js', os.path.join(STATIC_URL, 'js').replace('\\','/')),
+    ('js', os.path.join(STATIC_URL, 'js').replace('\\', '/')),
+    ('images', os.path.join(STATIC_URL, 'images').replace('\\', '/')),
 }
 
 STATICFILES_FINDERS = (

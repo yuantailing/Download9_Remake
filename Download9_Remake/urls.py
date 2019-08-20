@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import re_path
 from Download9 import views as download9_views
-
-'''re_path(r'^account9_login/?$', download9_views.account9_login),'''
+from django.conf import settings
+from django.views import static
 
 urlpatterns = [
     re_path(r'admin/', admin.site.urls),
@@ -34,7 +34,8 @@ urlpatterns = [
     re_path(r'^get_task_state/?$', download9_views.gettaskstate),
     re_path(r'^get_overall_state/?$', download9_views.getoverallstate),
     re_path(r'^(delete|pause|continue|switch)_task/?$', download9_views.optask),
-    re_path(r'^download_task/task_name=(.+)/gid=(.+)/?$', download9_views.downloadtask),
+    re_path(r'^download_task/task_name=(.*)/gid=(.+)/?$', download9_views.downloadtask),
     re_path(r'^$', download9_views.toindex),
+    re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}),
     re_path(r'^.*$', download9_views.jump_to_not_exist),
 ]
