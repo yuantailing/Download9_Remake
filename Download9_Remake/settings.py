@@ -26,7 +26,7 @@ SECRET_KEY = 's-^16m98u$bti56bt2&i3(6!%_mdoj)l2&i6m*55-tt#$2iu^z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Download9_Remake.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join('/tmp', 'db.sqlite3'),
     }
 }
 

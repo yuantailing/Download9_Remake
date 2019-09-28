@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  download:
+    build: .
+    restart: "no"
+    volumes:
+      - .:/opt/Download9_Remake
+    network_mode: host

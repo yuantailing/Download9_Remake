@@ -1,0 +1,4 @@
+*.pyc
+
+/aria2cdownload
+/db.sqlite3

@@ -45,21 +45,21 @@
   "_comment_TaskNumberLimit" : "单个用户最大任务数",
   "TaskNumberLimit" : 10,
   "_comment_ServerRoot" : "服务器启动地址，如http://localhost:8000",
-  "ServerRoot" : "",
+  "ServerRoot" : "http://web.example.com:8001",
   "_comment_DownloadRoot" : "下载文件存放根目录",
   "DownloadRoot" : "",
   "_comment_AriaAddress" : "Aria2c的RPC地址",
-  "AriaAddress" : "",
+  "AriaAddress" : "http://localhost:6800/jsonrpc",
   "AutoDelete" : {
 	"_comment" : "AutoDelete机制自动删除非persistent属性的任务，Log表示日志存储位置，Time表示定时",
     "Log" : "",
     "Time" : "08 03 * * *"
   },
   "Database" : {
-	"_comment" : "Database下为数据库配置信息，使用的是Mysql，Host表示数据库地址，如localhost",
-    "Host" : "",
-    "Username" : "",
-    "Password" : "",
-    "Database" : ""
+    "_comment" : "Database下为数据库配置信息，使用的是Mysql，Host表示数据库地址，如localhost",
+    "Host" : "database.example.com",
+    "Username" : "username",
+    "Password" : "password",
+    "Database" : "database"
   }
 }

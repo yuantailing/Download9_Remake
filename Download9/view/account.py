@@ -5,6 +5,7 @@ import Download9.view.const as Const
 
 def getinfo(code):
     import requests, json
+    return {'user': {'name': 'testuser-1', 'password': '000000'}}
     req = {"client_id" : Const.Const["Account9"]["client_id"],
            "client_secret" : Const.Const["Account9"]["client_secret"],
            "code" : code}
@@ -34,9 +35,9 @@ def account9_login(request):
         printf('')
         printf('a9test_begin')
         '''
-        assert request.GET.__contains__("code")
+        #assert request.GET.__contains__("code")
         '''printf('a9test_start_get_info')'''
-        ret = getinfo(request.GET["code"])
+        ret = getinfo(request.GET.get('code'))
         '''printf('a9test_end_get_info')'''
         try:
             '''printf('a9test_try_read_old_account')'''
